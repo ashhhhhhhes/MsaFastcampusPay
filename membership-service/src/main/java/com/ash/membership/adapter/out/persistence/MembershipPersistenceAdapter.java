@@ -1,13 +1,14 @@
 package com.ash.membership.adapter.out.persistence;
 
+import com.ash.membership.application.port.out.FindMembershipPort;
 import common.PersistenceAdapter;
-import com.ash.membership.application.port.out.MembershipPort;
+import com.ash.membership.application.port.out.RegisterMembershipPort;
 import com.ash.membership.domain.Membership;
 import lombok.RequiredArgsConstructor;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class MembershipPersistenceAdapter implements MembershipPort {
+public class MembershipPersistenceAdapter implements RegisterMembershipPort, FindMembershipPort {
 
     private final SpringJpaMembershipRepository membershipRepository;
 
@@ -20,5 +21,10 @@ public class MembershipPersistenceAdapter implements MembershipPort {
                 membershipIsValid.isValid(),
                 membershipIsIsCorp.isCorp()
         ));
+    }
+
+    @Override
+    public MembershipJpaEntity findMembershipById(Membership.MembershipId membershipId) {
+        return membershipRepository.findById(Long.valueOf(membershipId.getMembershipId())).get() ;
     }
 }

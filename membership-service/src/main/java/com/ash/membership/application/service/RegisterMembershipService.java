@@ -5,7 +5,7 @@ import com.ash.membership.adapter.out.persistence.MembershipJpaEntity;
 import com.ash.membership.adapter.out.persistence.MembershipMapper;
 import com.ash.membership.application.port.in.RegisterMembershipCommand;
 import com.ash.membership.application.port.in.RegisterMembershipUserCase;
-import com.ash.membership.application.port.out.MembershipPort;
+import com.ash.membership.application.port.out.RegisterMembershipPort;
 import com.ash.membership.domain.Membership;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RegisterMembershipService implements RegisterMembershipUserCase {
 
-    private final MembershipPort membershipPort;
+    private final RegisterMembershipPort membershipPort;
     private final MembershipMapper membershipMapper;
 
     @Override
