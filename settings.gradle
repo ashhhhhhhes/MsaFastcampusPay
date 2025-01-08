@@ -1,3 +1,3 @@
-rootProject.name = 'MsaFastcampusPay'
+rootProject.name = 'msa-fastcampus-pay'
 include 'membership-service'
 include 'common'
