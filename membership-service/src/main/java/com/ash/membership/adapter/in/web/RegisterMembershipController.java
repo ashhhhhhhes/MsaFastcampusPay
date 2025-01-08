@@ -1,6 +1,6 @@
 package com.ash.membership.adapter.in.web;
 
-import common.WebAdapter;
+import com.ash.common.WebAdapter;
 import com.ash.membership.application.port.in.RegisterMembershipCommand;
 import com.ash.membership.application.port.in.RegisterMembershipUserCase;
 import com.ash.membership.domain.Membership;
@@ -16,7 +16,7 @@ public class RegisterMembershipController {
 
     private final RegisterMembershipUserCase registerMembershipUserCase;
 
-    @PostMapping("/register")
+    @PostMapping("/membership/register")
     Membership registerMembership(@RequestBody RegisterMembershipRequest request) {
         // Req -> Cmd
         RegisterMembershipCommand command = RegisterMembershipCommand.builder()

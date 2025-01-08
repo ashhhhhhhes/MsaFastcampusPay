@@ -6,7 +6,7 @@ import com.ash.membership.application.port.in.FindMembershipCommand;
 import com.ash.membership.application.port.in.FindMembershipUseCase;
 import com.ash.membership.application.port.out.FindMembershipPort;
 import com.ash.membership.domain.Membership;
-import common.UserCase;
+import com.ash.common.UserCase;
 import lombok.RequiredArgsConstructor;
 
 @UserCase

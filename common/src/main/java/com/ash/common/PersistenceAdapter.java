@@ -1,4 +1,4 @@
-package common;
+package com.ash.common;
 
 
 import org.springframework.stereotype.Component;

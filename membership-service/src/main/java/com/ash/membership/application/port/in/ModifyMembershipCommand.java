@@ -1,6 +1,5 @@
 package com.ash.membership.application.port.in;
 
-import com.ash.common.SelfValidating;
 import jakarta.validation.constraints.AssertTrue;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +9,10 @@ import lombok.NonNull;
 @Builder
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class RegisterMembershipCommand extends SelfValidating<RegisterMembershipCommand> {
+public class ModifyMembershipCommand {
+
+    @NonNull
+    private final String membershipId;
 
     @NonNull
     private final String name;
@@ -25,6 +27,5 @@ public class RegisterMembershipCommand extends SelfValidating<RegisterMembership
     private final boolean isValid;
 
     private final boolean isCorp;
-
 
 }

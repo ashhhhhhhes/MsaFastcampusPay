@@ -1,4 +1,5 @@
-package common;
+package com.ash.common;
+
 
 import org.springframework.stereotype.Component;
 
@@ -8,5 +9,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Component
-public @interface WebAdapter {
+public @interface UserCase {
 }

@@ -1,27 +1,28 @@
 package com.ash.membership.application.service;
 
-import com.ash.common.UserCase;
 import com.ash.membership.adapter.out.persistence.MembershipJpaEntity;
 import com.ash.membership.adapter.out.persistence.MembershipMapper;
-import com.ash.membership.application.port.in.RegisterMembershipCommand;
-import com.ash.membership.application.port.in.RegisterMembershipUserCase;
-import com.ash.membership.application.port.out.RegisterMembershipPort;
+import com.ash.membership.application.port.in.ModifyMembershipCommand;
+import com.ash.membership.application.port.in.ModifyMembershipUseCase;
+import com.ash.membership.application.port.out.ModifyMembershipPort;
 import com.ash.membership.domain.Membership;
+import com.ash.common.UserCase;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
-
 @UserCase
-@Transactional
 @RequiredArgsConstructor
-public class RegisterMembershipService implements RegisterMembershipUserCase {
+@Transactional
+public class ModifyMembershipService implements ModifyMembershipUseCase {
 
-    private final RegisterMembershipPort membershipPort;
+    private final ModifyMembershipPort modifyMembershipPort;
     private final MembershipMapper membershipMapper;
 
+
     @Override
-    public Membership registerMembership(RegisterMembershipCommand command) {
-        MembershipJpaEntity jpaEntity = membershipPort.createMembership(
+    public Membership modifyMembership(ModifyMembershipCommand command) {
+        MembershipJpaEntity entity =  modifyMembershipPort.modifyMembership(
+                new Membership.MembershipId(command.getMembershipId()),
                 new Membership.MembershipName(command.getName()),
                 new Membership.MembershipEmail(command.getEmail()),
                 new Membership.MembershipAddress(command.getAddress()),
@@ -29,7 +30,7 @@ public class RegisterMembershipService implements RegisterMembershipUserCase {
                 new Membership.MembershipIsIsCorp(command.isCorp())
         );
 
-        // entity -> domain
-        return membershipMapper.mapToDomainEntity(jpaEntity);
+        return membershipMapper.mapToDomainEntity(entity);
     }
+
 }

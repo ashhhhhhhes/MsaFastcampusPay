@@ -28,14 +28,14 @@ public class MembershipJpaEntity {
 
     private boolean isValid;
 
-    private boolean isCrop;
+    private boolean isCorp;
 
-    public MembershipJpaEntity(String name, String email, String address, boolean isValid, boolean isCrop) {
+    public MembershipJpaEntity(String name, String email, String address, boolean isValid, boolean isCorp) {
         this.name = name;
         this.email = email;
         this.address = address;
         this.isValid = isValid;
-        this.isCrop = isCrop;
+        this.isCorp = isCorp;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class MembershipJpaEntity {
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 ", isValid=" + isValid +
-                ", isCrop=" + isCrop +
+                ", isCrop=" + isCorp +
                 '}';
     }
 }

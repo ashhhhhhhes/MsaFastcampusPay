@@ -1,6 +1,6 @@
 package com.ash.membership.application.port.in;
 
-import common.SelfValidating;
+import com.ash.common.SelfValidating;
 import lombok.*;
 
 @Builder
