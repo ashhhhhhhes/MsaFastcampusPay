@@ -2,7 +2,7 @@ package com.ash.banking.application.service;
 
 import com.ash.banking.adapter.out.external.bank.BankAccountInfo;
 import com.ash.banking.adapter.out.external.bank.GetBankAccountInfoRequest;
-import com.ash.banking.adapter.out.external.bank.RequestBankAccountInfoAdapter;
+import com.ash.banking.adapter.out.external.bank.BankAccountInfoAdapter;
 import com.ash.banking.adapter.out.persistence.RegisteredBankAccountJpaEntity;
 import com.ash.banking.adapter.out.persistence.RegisteredBankAccountMapper;
 import com.ash.banking.application.port.in.RegisterBankAccountCommand;
@@ -20,13 +20,13 @@ import lombok.RequiredArgsConstructor;
 public class RegisterBankAccountService implements RegisterBankAccountUserCase {
 
     private final RegisterBankAccountPort registerBankAccountPort;
-    private final RequestBankAccountInfoAdapter requestBankAccountInfoAdapter;
+    private final BankAccountInfoAdapter bankAccountInfoAdapter;
     private final RegisteredBankAccountMapper registeredBankAccountMapper;
 
     @Override
     public RegisteredBankAccount registerBankAccount(RegisterBankAccountCommand command) {
 
-        BankAccountInfo bankAccountInfo = requestBankAccountInfoAdapter.getBankAccountInfo(new GetBankAccountInfoRequest(
+        BankAccountInfo bankAccountInfo = bankAccountInfoAdapter.getBankAccountInfo(new GetBankAccountInfoRequest(
                 command.getBankName(),
                 command.getBankAccountNumber()
         ));

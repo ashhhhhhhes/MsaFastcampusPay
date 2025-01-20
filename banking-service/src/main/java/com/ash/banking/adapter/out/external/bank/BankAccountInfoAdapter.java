@@ -1,14 +1,13 @@
 package com.ash.banking.adapter.out.external.bank;
 
 import com.ash.banking.application.port.out.external.bank.RequestBankAccountInfoPort;
+import com.ash.banking.application.port.out.external.bank.RequestExternalFirmbankingPort;
 import com.ash.common.ExternalSystemAdapter;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Random;
-
 @ExternalSystemAdapter
 @RequiredArgsConstructor
-public class RequestBankAccountInfoAdapter implements RequestBankAccountInfoPort {
+public class BankAccountInfoAdapter implements RequestBankAccountInfoPort, RequestExternalFirmbankingPort {
 
     @Override
     public BankAccountInfo getBankAccountInfo(GetBankAccountInfoRequest request) {
@@ -16,4 +15,9 @@ public class RequestBankAccountInfoAdapter implements RequestBankAccountInfoPort
         return new BankAccountInfo(request.getBankName(), request.getBankAccountNumber(), true);
     }
 
+    @Override
+    public FirmbankingResult requestExternalFirmbanking(ExternalFirmbankingRequest request) {
+
+        return  new FirmbankingResult(0);
+    }
 }

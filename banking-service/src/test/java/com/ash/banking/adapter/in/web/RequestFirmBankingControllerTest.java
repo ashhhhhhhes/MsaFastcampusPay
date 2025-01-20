@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @SpringBootTest
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
-class RegisterBankAccountControllerTest {
+class RequestFirmBankingControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -27,9 +27,9 @@ class RegisterBankAccountControllerTest {
 
     @Test
     public void testRegisterMembership() throws Exception {
-        RegisterBankAccountRequest request = new RegisterBankAccountRequest("1", "우리은행", "123123123");
+        FirmBankingHttpRequest request = new FirmBankingHttpRequest("우리은행", "123123123", "신한은행", "123123123", 10000);
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/banking/account/register")
+                MockMvcRequestBuilders.post("/banking/firmbanking/request")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writer().writeValueAsString(request))
         ).andExpect(MockMvcResultMatchers.status().isOk());
