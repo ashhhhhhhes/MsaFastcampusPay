@@ -26,5 +26,13 @@ public class RegisterMembershipCommand extends SelfValidating<RegisterMembership
 
     private final boolean isCorp;
 
+    public RegisterMembershipCommand(@NonNull String name, @NonNull String email, @NonNull String address, boolean isValid, boolean isCorp) {
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.isValid = isValid;
+        this.isCorp = isCorp;
+        this.validateSelf();
+    }
 
 }

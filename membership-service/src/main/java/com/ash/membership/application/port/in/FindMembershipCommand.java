@@ -11,4 +11,8 @@ public class FindMembershipCommand extends SelfValidating<FindMembershipCommand>
     @NonNull
     private final String membershipId;
 
+    public FindMembershipCommand(@NonNull String membershipId) {
+        this.membershipId = membershipId;
+        this.validateSelf();
+    }
 }
