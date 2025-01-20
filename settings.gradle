@@ -1,3 +1,4 @@
 rootProject.name = 'msa-fastcampus-pay'
 include 'membership-service'
+include 'banking-service'
 include 'common'

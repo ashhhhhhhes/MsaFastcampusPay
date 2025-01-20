@@ -1,5 +1,8 @@
 package com.ash.banking.application.service;
 
+import com.ash.banking.adapter.out.external.bank.BankAccountInfo;
+import com.ash.banking.adapter.out.external.bank.GetBankAccountInfoRequest;
+import com.ash.banking.adapter.out.external.bank.RequestBankAccountInfoAdapter;
 import com.ash.banking.adapter.out.persistence.RegisteredBankAccountJpaEntity;
 import com.ash.banking.adapter.out.persistence.RegisteredBankAccountMapper;
 import com.ash.banking.application.port.in.RegisterBankAccountCommand;
@@ -17,18 +20,28 @@ import lombok.RequiredArgsConstructor;
 public class RegisterBankAccountService implements RegisterBankAccountUserCase {
 
     private final RegisterBankAccountPort registerBankAccountPort;
+    private final RequestBankAccountInfoAdapter requestBankAccountInfoAdapter;
     private final RegisteredBankAccountMapper registeredBankAccountMapper;
 
     @Override
-    public RegisteredBankAccount registerMembership(RegisterBankAccountCommand command) {
-        RegisteredBankAccountJpaEntity jpaEntity = registerBankAccountPort.createRegisteredBankAccount(
-                new RegisteredBankAccount.MembershipId(command.getMembershipId()),
-                new RegisteredBankAccount.BankName(command.getBankName()),
-                new RegisteredBankAccount.BankAccountNumber(command.getBankAccountNumber()),
-                new RegisteredBankAccount.LinkedStatusIsValid(command.isValid())
-        );
+    public RegisteredBankAccount registerBankAccount(RegisterBankAccountCommand command) {
 
-        // entity -> domain
-        return registeredBankAccountMapper.mapToDomainEntity(jpaEntity);
+        BankAccountInfo bankAccountInfo = requestBankAccountInfoAdapter.getBankAccountInfo(new GetBankAccountInfoRequest(
+                command.getBankName(),
+                command.getBankAccountNumber()
+        ));
+
+        if (bankAccountInfo.isValid()) {
+            RegisteredBankAccountJpaEntity savedBankAccount = registerBankAccountPort.createRegisteredBankAccount(
+                    new RegisteredBankAccount.MembershipId(command.getMembershipId()),
+                    new RegisteredBankAccount.BankName(command.getBankName()),
+                    new RegisteredBankAccount.BankAccountNumber(command.getBankAccountNumber()),
+                    new RegisteredBankAccount.LinkedStatusIsValid(true)
+            );
+
+            return registeredBankAccountMapper.mapToDomainEntity(savedBankAccount);
+        } else {
+            return null;
+        }
     }
 }

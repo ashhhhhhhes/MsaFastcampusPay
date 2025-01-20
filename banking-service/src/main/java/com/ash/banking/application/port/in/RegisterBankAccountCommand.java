@@ -1,7 +1,6 @@
 package com.ash.banking.application.port.in;
 
 import com.ash.common.SelfValidating;
-import jakarta.validation.constraints.AssertTrue;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,14 +20,11 @@ public class RegisterBankAccountCommand extends SelfValidating<RegisterBankAccou
     @NonNull
     private String bankAccountNumber;
 
-    @AssertTrue
-    private boolean isValid;
 
-    public RegisterBankAccountCommand(String membershipId, String bankName, String bankAccountNumber, boolean isValid) {
+    public RegisterBankAccountCommand(String membershipId, String bankName, String bankAccountNumber) {
         this.membershipId = membershipId;
         this.bankName = bankName;
         this.bankAccountNumber = bankAccountNumber;
-        this.isValid = isValid;
         this.validateSelf();
     }
 }

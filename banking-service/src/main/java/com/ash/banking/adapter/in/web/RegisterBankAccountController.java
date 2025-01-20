@@ -16,18 +16,23 @@ public class RegisterBankAccountController {
 
     private final RegisterBankAccountUserCase registerBankAccountUserCase;
 
-    @PostMapping("/membership/register")
+    @PostMapping("/banking/account/register")
     RegisteredBankAccount registerMembership(@RequestBody RegisterBankAccountRequest request) {
         // Req -> Cmd
         RegisterBankAccountCommand command = RegisterBankAccountCommand.builder()
                 .membershipId(request.getMembershipId())
                 .bankName(request.getBankName())
                 .bankAccountNumber(request.getBankAccountNumber())
-                .isValid(request.isValid())
                 .build();
 
-        // UserCase
-        return registerBankAccountUserCase.registerMembership(command);
+        RegisteredBankAccount registeredBankAccount = registerBankAccountUserCase.registerBankAccount(command);
+
+        // Null error 처리.
+        if (registeredBankAccount == null) {
+           return null;
+        }
+
+        return registeredBankAccount;
     }
 
 }

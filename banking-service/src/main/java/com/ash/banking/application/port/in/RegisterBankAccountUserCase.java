@@ -4,5 +4,5 @@ import com.ash.banking.domain.RegisteredBankAccount;
 
 public interface RegisterBankAccountUserCase {
 
-    RegisteredBankAccount registerMembership(RegisterBankAccountCommand command);
+    RegisteredBankAccount registerBankAccount(RegisterBankAccountCommand command);
 }
