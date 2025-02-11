@@ -7,10 +7,14 @@ import com.ash.money.adapter.in.web.response.MoneyChangeResultDetail;
 import com.ash.money.application.port.in.IncreaseMoneyRequestCommand;
 import com.ash.money.application.port.in.IncreaseMoneyRequestUseCase;
 import com.ash.money.domain.MoneyChangingRequest;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @WebAdapter
 @RestController
@@ -23,19 +27,16 @@ public class RequestMoneyChangingController {
     @PostMapping("/money/increase")
     MoneyChangeResultDetail increase(@RequestBody IncreaseMoneyRequest request) {
 
-        MoneyChangingRequest d = increaseMoneyRequestUseCase.increaseRequestMoneyChanging(
+        MoneyChangingRequest moneyChangingRequest = increaseMoneyRequestUseCase.increaseRequestMoneyChanging(
                 IncreaseMoneyRequestCommand.builder()
                         .targetMembershipId(request.getTargetMembershipId())
                         .changingMoneyAmount(request.getAmount())
                         .build());
 
-        // MoneyChangingRequest -> MoneyChangeResultDetail 로 변환
-
-        moneyChangingResultMapper.mapToMoneyChangingResult(d);
-
-        return null;
+        return moneyChangingResultMapper.mapToMoneyChangingResult(moneyChangingRequest);
     }
 
+    // TODO 출금 API
     @PostMapping("/money/decrease")
     MoneyChangeResultDetail decrease(@RequestBody DecreaseMoneyRequest request) {
 
@@ -48,6 +49,12 @@ public class RequestMoneyChangingController {
 
         // MoneyChangingRequest -> MoneyChangeResultDetail 로 변환
 
+        return null;
+    }
+
+    // TODO 입출금 내역 조회 API
+    @GetMapping("/money/history")
+    List<MoneyChangeResultDetail> history() {
         return null;
     }
 

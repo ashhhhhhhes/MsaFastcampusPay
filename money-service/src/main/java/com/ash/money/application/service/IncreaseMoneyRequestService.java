@@ -30,7 +30,6 @@ public class IncreaseMoneyRequestService implements IncreaseMoneyRequestUseCase 
         // 2. 고객의 연동된 계좌가 있는지, 고객의 연동된 계좌의 잔액이 충분한지도 확인 (뱅킹)
 
         // 3. 법인 계좌 상태도 정상인지 확인 (뱅킹)
-
         UUID uuid = UUID.randomUUID();
 
         // 4. 증액을 위한 "기록". 요청 상태로 MoneyChangingRequest 를 생성한다. (머니)
