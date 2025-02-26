@@ -3,3 +3,5 @@ include 'membership-service'
 include 'banking-service'
 include 'money-service'
 include 'common'
+include 'logging-consumer'
+
